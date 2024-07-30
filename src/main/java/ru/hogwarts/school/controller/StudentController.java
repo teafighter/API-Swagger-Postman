@@ -19,7 +19,7 @@ public class StudentController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity getStudentInfo(@PathVariable Long id) {
+    public ResponseEntity getStudentInfo(@PathVariable long id) {
         Student student = studentService.findStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteStudent(@PathVariable Long id) {
+    public ResponseEntity deleteStudent(@PathVariable long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
