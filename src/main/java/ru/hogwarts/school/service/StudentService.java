@@ -36,13 +36,12 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public Collection<Student> findByAge(int age) {
-        ArrayList<Student> result = new ArrayList<>();
-        for (Student student : facultyStudents.values()) {
-            if (student.getAge() == age) {
-                result.add(student);
-            }
-        }
-        return result;
+    public ArrayList<Student> findByAge(int age) {
+        return studentRepository.findByAge(age);
+    }
+
+
+    public ArrayList<Student> findByAgeBetween(int minAge, int maxAge) {
+        return studentRepository.findByAgeBetween(minAge, maxAge);
     }
 }

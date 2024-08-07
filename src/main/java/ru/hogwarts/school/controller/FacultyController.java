@@ -53,4 +53,13 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
+
+    @GetMapping("{id}/students")
+    public ResponseEntity getFacultyStudents(@PathVariable long id) {
+        Faculty faculty = facultyService.findFaculty(id);
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(faculty.getStudents());
+    }
 }
