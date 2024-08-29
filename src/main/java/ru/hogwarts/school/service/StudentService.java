@@ -5,15 +5,10 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-
-    private final Map<Long, Student> facultyStudents = new HashMap<>();
     private Long studentID;
 
     public StudentService(StudentRepository studentRepository) {
