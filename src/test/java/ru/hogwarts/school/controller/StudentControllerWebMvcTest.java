@@ -1,6 +1,5 @@
 package ru.hogwarts.school.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class StudentControllerWebMvcTest {
         Long studentId = 1L;
         Student student = new Student("Ivan", 20);
 
-        when(studentService.findStudent(studentId)).thenReturn(student);
+        when(studentService.readStudent(studentId)).thenReturn(student);
 
         // when
         ResultActions perform = mockMvc.perform(get("/students/{id}", studentId));
@@ -82,7 +81,7 @@ public class StudentControllerWebMvcTest {
         Long studentId = 1L;
         Student student = new Student("Ivan", 20);
 
-        when(studentService.editStudent(student)).thenReturn(student);
+        when(studentService.updateStudent(student)).thenReturn(student);
 
         // when
         ResultActions perform = mockMvc.perform(put("/students/{id}", studentId)
