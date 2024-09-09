@@ -7,7 +7,8 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -66,5 +67,24 @@ public class StudentService {
     public ArrayList<Student> findLastFiveStudents() {
         logger.info("We have at least five students. Yay!");
         return studentRepository.findLastFiveStudents();
+    }
+
+    public List<String> findAllNamesStartsWithA() {
+        return studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(name -> name.startsWith("A"))
+                .collect(Collectors.toList());
+    }
+
+    public Double getAverageStudentsAgeInStream() {
+        return studentRepository.findAll()
+                .stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
+
+
     }
 }
