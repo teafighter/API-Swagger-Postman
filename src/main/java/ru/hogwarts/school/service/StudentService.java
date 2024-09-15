@@ -84,7 +84,45 @@ public class StudentService {
                 .mapToInt(Student::getAge)
                 .average()
                 .orElse(0);
+    }
 
+    public void printAllStudentsParallel() {
+        List<String> names = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
+        System.out.println(names.get(0));
+        System.out.println(names.get(1));
+        new Thread(() -> {
+            System.out.println(names.get(2));
+            System.out.println(names.get(3));
+        }).start();
+        new Thread(() -> {
+                System.out.println(names.get(4));
+                System.out.println(names.get(5));
+        }).start();
+    }
 
+    private synchronized void printNameSynchronized(String name) {
+        System.out.println(name);
+    }
+
+    public void printAllStudentsSynchronized() {
+        List<String> names = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
+        printNameSynchronized(names.get(0));
+        printNameSynchronized(names.get(1));
+
+        new Thread(() -> {
+            printNameSynchronized(names.get(2));
+            printNameSynchronized(names.get(3));
+        }).start();
+
+        new Thread(() -> {
+            printNameSynchronized(names.get(4));
+            printNameSynchronized(names.get(5));
+        }).start();
     }
 }
